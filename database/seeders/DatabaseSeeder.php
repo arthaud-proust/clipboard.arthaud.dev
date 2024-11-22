@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Text;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
+        User::factory()->has(Text::factory(10))->create([
             'email' => 'test@example.com',
         ]);
     }
