@@ -22,7 +22,7 @@ TextTest extends TestCase
                 'content' => 'Lorem ipsum',
             ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertDatabaseHas(Text::class, [
             'content' => 'Lorem ipsum',
         ]);
@@ -39,7 +39,7 @@ TextTest extends TestCase
                 'content' => 'Lorem ipsum',
             ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertDatabaseHas(Text::class, [
             'content' => 'Lorem ipsum',
         ]);
@@ -72,7 +72,7 @@ TextTest extends TestCase
             ->actingAs($user)
             ->delete("/texts/$text->id");
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertDatabaseCount(Text::class, 0);
     }
 

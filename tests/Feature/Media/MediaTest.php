@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Media;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,7 +26,7 @@ class MediaTest extends TestCase
                 'file' => $file,
             ]);
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertCount(1, $user->getMedia());
     }
 
@@ -42,7 +42,7 @@ class MediaTest extends TestCase
             ->actingAs($user)
             ->delete("/medias/$media->id");
 
-        $response->assertRedirect('/');
+        $response->assertRedirect('/home');
         $this->assertDatabaseCount(Media::class, 0);
     }
 
