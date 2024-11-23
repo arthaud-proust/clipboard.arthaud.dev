@@ -4,18 +4,18 @@ import {TextDto} from "@/types/generated";
 import TextCardInput from "@/Components/Text/TextCardInput.vue";
 import {XMarkIcon} from '@heroicons/vue/20/solid'
 
-defineProps<{
+const props = defineProps<{
     texts?: Array<TextDto>;
     focusTextId?: TextDto['id']
 }>();
 
 const save = (text: TextDto | Omit<TextDto, "id">) => {
-    if ("id" in text) {
+    if ("id" in text && text.id) {
         if (text.content === "") {
             return destroy(text)
         }
 
-        router.put(route('texts.update', text.id), {
+        router.put(route('texts.update', text), {
             content: text.content,
         }, {
             preserveState: false,
@@ -39,11 +39,11 @@ const destroy = (text: TextDto) => {
 <template>
     <Head title="Clipboard" />
 
-    <div class="max-w-lg mx-auto flex flex-col gap-2 pt-20">
+    <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 pt-20">
         <h1 class="text-2xl mb-2">Clipboard</h1>
 
         <article class="w-full">
-            <TextCardInput class="w-full" @save="save" placeholder="Nouvelle note..." />
+            <TextCardInput class="w-full" @save="save" placeholder="Nouvelle note..." :focused="!focusTextId || texts?.length===0" />
         </article>
         <article v-for="text in texts" class="w-full flex">
             <TextCardInput :text="text" class="w-full" @save="save" :focused="focusTextId === text.id " />
