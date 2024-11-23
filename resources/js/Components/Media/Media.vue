@@ -21,7 +21,7 @@ const copyMedia = async () => {
         ]);
         copied.value = true
         setTimeout(() => copied.value = false, 3_000)
-    } catch (err) {
+    } catch (err: any) {
         console.error(err.name, err.message);
     }
 }
