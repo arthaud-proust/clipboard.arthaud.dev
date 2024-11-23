@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use App\Cleaners\TextCleaner;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote')->hourly();
+Artisan::command('text:clean', function () {
+    resolve(TextCleaner::class)->clean();
+})->everyMinute();
