@@ -5,20 +5,19 @@ import {computed, onMounted, ref} from "vue";
 
 const props = withDefaults(
     defineProps<{
-        text?: TextDto | Omit<TextDto, 'id'>
+        text?: TextDto | Omit<TextDto, 'id' | 'updatedAt' | 'createdAt'>
         focused?: boolean
         placeholder?: string
     }>(),
     {
         text: () => ({
-            id: undefined,
             content: ''
         })
     }
 )
 
 const emit = defineEmits<{
-    save: [TextDto | Omit<TextDto, 'id'>]
+    save: [typeof props.text]
 }>()
 
 const text = ref(props.text)

@@ -12,7 +12,7 @@ const props = defineProps<{
     focusTextId?: TextDto['id']
 }>();
 
-const saveText = (text: TextDto | Omit<TextDto, "id">) => {
+const saveText = (text: TextDto | Omit<TextDto, 'id' | 'updatedAt' | 'createdAt'>) => {
     if ("id" in text && text.id) {
         if (text.content === "") {
             return destroyText(text)
@@ -39,7 +39,7 @@ const destroyText = (text: TextDto) => {
 }
 
 
-const {files, open, reset, onChange} = useFileDialog({
+const {open, onChange} = useFileDialog({
     accept: '*',
     directory: false,
 })
