@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import {TextDto} from "@/types/generated";
-import {useDebounceFn} from "@vueuse/core";
+import {useClipboard, useDebounceFn} from "@vueuse/core";
 import {computed, onMounted, ref} from "vue";
+import {ClipboardDocumentCheckIcon, ClipboardIcon} from "@heroicons/vue/24/outline";
 
 const props = withDefaults(
     defineProps<{
         text?: TextDto | Omit<TextDto, 'id' | 'updatedAt' | 'createdAt'>
         focused?: boolean
         placeholder?: string
+        copiable?: boolean
     }>(),
     {
         text: () => ({
@@ -44,7 +46,30 @@ onMounted(() => {
         textarea.value?.focus();
     }
 });
+
+const {copy, copied} = useClipboard()
 </script>
 <template>
-    <textarea ref="textarea" :placeholder="placeholder" class="border-neutral-300 rounded-xl resize-none text-lg" v-model="textContent"></textarea>
+    <div class="flex flex-col border border-neutral-300 overflow-hidden rounded-lg text-lg">
+        <textarea
+            ref="textarea" :placeholder="placeholder" class="px-4 py-2 border-0 resize-none text-lg"
+            v-model="textContent"
+        >
+
+        </textarea>
+
+        <button v-if="copiable" type="button" @click="()=>copy(text.content)"
+                class="flex-1 px-4 py-2 flex gap-1 items-center justify-center"
+                :class="copied?'bg-green-50 text-green-700': 'bg-neutral-50 hover:bg-neutral-100 text-neutral-800'"
+        >
+            <template v-if="copied">
+                Copied!
+                <ClipboardDocumentCheckIcon class="size-5" />
+            </template>
+            <template v-else>
+                Copy
+                <ClipboardIcon class="size-5" />
+            </template>
+        </button>
+    </div>
 </template>

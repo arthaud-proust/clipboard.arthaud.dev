@@ -77,20 +77,21 @@ const handlePaste = (e: ClipboardEvent) => {
 <template>
     <Head title="Clipboard" />
 
-    <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 pt-20" @paste="handlePaste">
+    <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 py-20" @paste="handlePaste">
         <h1 class="text-2xl mb-2">Clipboard</h1>
 
         <article class="w-full flex">
-            <TextCardInput class="w-full" @save="saveText" placeholder="Add note..." :focused="!focusTextId || texts?.length===0" />
+            <TextCardInput class="w-full" @save="saveText" placeholder="Copy anything..." :focused="!focusTextId || texts?.length===0" />
         </article>
 
-        <button type="button" @click="()=>open()" class="rounded-xl border border-neutral-300 px-4 py-2 mr-auto flex gap-1 items-center text-lg">
-            Add file
+        <button type="button" @click="()=>open()"
+                class="rounded-lg border border-neutral-100 bg-neutral-50 text-neutral-800 px-4 py-2 mr-auto flex gap-1 items-center text-lg">
+            Select file
 
             <PlusIcon class="size-5" />
         </button>
 
-        <div class="flex flex-col-reverse gap-2">
+        <div class="mt-6 flex flex-col-reverse gap-2">
             <div v-for="media in medias" class="w-full flex" :style="{order: order(media)}">
                 <Media class="w-full" :media="media" />
                 <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyMedia(media)">
@@ -99,7 +100,7 @@ const handlePaste = (e: ClipboardEvent) => {
             </div>
 
             <article v-for="text in texts" class="w-full flex" :style="{order: order(text)}">
-                <TextCardInput :text="text" class="w-full" @save="saveText" :focused="focusTextId === text.id " />
+                <TextCardInput :text="text" class="w-full" @save="saveText" :focused="focusTextId === text.id " copiable />
                 <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyText(text)">
                     <XMarkIcon class="size-6" />
                 </button>
