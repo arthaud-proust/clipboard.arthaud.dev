@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
 
 const props = withDefaults(
     defineProps<{
@@ -44,9 +44,9 @@ const open = ref(false);
 
 <template>
     <div class="relative">
-        <div @click="open = !open">
+        <button @click="open = !open" class="h-full" type="button">
             <slot name="trigger" />
-        </div>
+        </button>
 
         <!-- Full Screen Dropdown Overlay -->
         <div
