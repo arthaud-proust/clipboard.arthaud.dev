@@ -73,7 +73,7 @@ const destroyMedia = (media: MediaDto) => {
             <TextCardInput class="w-full" @save="saveText" placeholder="Add note..." :focused="!focusTextId || texts?.length===0" />
         </article>
 
-        <button type="button" @click="open" class="rounded-xl border border-neutral-300 px-4 py-2 mr-auto flex gap-1 items-center text-lg">
+        <button type="button" @click="()=>open" class="rounded-xl border border-neutral-300 px-4 py-2 mr-auto flex gap-1 items-center text-lg">
             Add file
 
             <PlusIcon class="size-5" />
