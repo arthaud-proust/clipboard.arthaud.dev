@@ -39,21 +39,23 @@ const destroyText = (text: TextDto) => {
 }
 
 
-const {open, onChange} = useFileDialog({
-    accept: '*',
-    directory: false,
-})
-
-onChange((files) => {
-    const file = files?.item(0)
-
-    if (!file) return;
-
+const createMedia = (file: File) => {
     router.post(route('medias.store'), {
         file,
     }, {
         preserveState: false,
     })
+}
+
+const {open, onChange} = useFileDialog({
+    accept: '*',
+    directory: false,
+})
+onChange((files) => {
+    const file = files?.item(0)
+    if (!file) return;
+
+    createMedia(file)
 })
 
 const destroyMedia = (media: MediaDto) => {
@@ -63,12 +65,19 @@ const destroyMedia = (media: MediaDto) => {
 }
 
 const order = (obj: { updatedAt: string }) => Date.parse(obj.updatedAt) / 1000;
+
+const handlePaste = (e: ClipboardEvent) => {
+    const file = e.clipboardData?.files.item(0);
+    if (file) {
+        return createMedia(file)
+    }
+}
 </script>
 
 <template>
     <Head title="Clipboard" />
 
-    <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 pt-20">
+    <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 pt-20" @paste="handlePaste">
         <h1 class="text-2xl mb-2">Clipboard</h1>
 
         <article class="w-full flex">
