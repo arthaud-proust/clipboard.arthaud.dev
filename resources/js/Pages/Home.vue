@@ -61,6 +61,8 @@ const destroyMedia = (media: MediaDto) => {
         preserveState: false,
     })
 }
+
+const order = (obj: { updatedAt: string }) => Date.parse(obj.updatedAt) / 1000;
 </script>
 
 <template>
@@ -79,18 +81,20 @@ const destroyMedia = (media: MediaDto) => {
             <PlusIcon class="size-5" />
         </button>
 
-        <div v-for="media in medias" class="w-full flex">
-            <Media class="w-full" :media="media" />
-            <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyMedia(media)">
-                <XMarkIcon class="size-6" />
-            </button>
-        </div>
+        <div class="flex flex-col-reverse gap-2">
+            <div v-for="media in medias" class="w-full flex" :style="{order: order(media)}">
+                <Media class="w-full" :media="media" />
+                <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyMedia(media)">
+                    <XMarkIcon class="size-6" />
+                </button>
+            </div>
 
-        <article v-for="text in texts" class="w-full flex">
-            <TextCardInput :text="text" class="w-full" @save="saveText" :focused="focusTextId === text.id " />
-            <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyText(text)">
-                <XMarkIcon class="size-6" />
-            </button>
-        </article>
+            <article v-for="text in texts" class="w-full flex" :style="{order: order(text)}">
+                <TextCardInput :text="text" class="w-full" @save="saveText" :focused="focusTextId === text.id " />
+                <button class="p-2 flex items-start text-black hover:text-red-700" @click="()=>destroyText(text)">
+                    <XMarkIcon class="size-6" />
+                </button>
+            </article>
+        </div>
     </div>
 </template>

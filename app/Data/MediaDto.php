@@ -2,6 +2,7 @@
 
 namespace App\Data;
 
+use DateTime;
 use Spatie\LaravelData\Dto;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
@@ -15,6 +16,8 @@ class MediaDto extends Dto
         public string $filename,
         public string $mimetype,
         public string $url,
+        public DateTime $createdAt,
+        public DateTime $updatedAt,
     ) {
     }
 
@@ -26,6 +29,8 @@ class MediaDto extends Dto
             $media->file_name,
             $media->mime_type,
             $media->getTemporaryUrl(now()->addMinutes(10)),
+            $media->created_at,
+            $media->updated_at,
         );
     }
 }
