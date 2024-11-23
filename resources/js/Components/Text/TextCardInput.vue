@@ -47,5 +47,5 @@ onMounted(() => {
 });
 </script>
 <template>
-    <textarea ref="textarea" :placeholder="placeholder" class="border-neutral-300 rounded-xl resize-none" v-model="textContent"></textarea>
+    <textarea ref="textarea" :placeholder="placeholder" class="border-neutral-300 rounded-xl resize-none text-lg" v-model="textContent"></textarea>
 </template>

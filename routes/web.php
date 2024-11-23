@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TextController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('texts', TextController::class)->only(['store', 'update', 'destroy']);
+    Route::resource('medias', MediaController::class)->only(['store', 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
