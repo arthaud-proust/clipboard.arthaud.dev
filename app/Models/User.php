@@ -18,6 +18,7 @@ class User extends Authenticatable implements HasMedia
     use HasFactory, Notifiable;
 
     public const MAX_MEDIA_SIZE_KB = 500 * 1024;
+    public const MAX_MEDIA_COUNT = 10;
 
     /**
      * The attributes that are mass assignable.

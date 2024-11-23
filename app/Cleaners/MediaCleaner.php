@@ -2,7 +2,7 @@
 
 namespace App\Cleaners;
 
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Models\Media;
 use function now;
 
 class MediaCleaner

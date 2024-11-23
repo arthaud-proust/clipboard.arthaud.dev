@@ -2,9 +2,9 @@
 
 namespace App\Data;
 
+use App\Models\Media;
 use DateTime;
 use Spatie\LaravelData\Dto;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]

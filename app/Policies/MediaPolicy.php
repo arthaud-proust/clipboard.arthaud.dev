@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
+use App\Models\Media;
 use App\Models\User;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaPolicy
 {

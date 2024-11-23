@@ -6,12 +6,14 @@ import {PlusIcon, XMarkIcon} from '@heroicons/vue/24/outline'
 import {useFileDialog} from '@vueuse/core'
 import Media from "@/Components/Media/Media.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import VButton from "@/Components/Base/VButton.vue";
 
 const props = defineProps<{
-    texts?: Array<TextDto>;
-    medias?: Array<MediaDto>;
-    focusTextId?: TextDto['id']
+    texts: Array<TextDto>;
+    medias: Array<MediaDto>;
+    maxMediaCount: number;
+    focusTextId: TextDto['id']
 }>();
 
 const destroyedTextIds = ref<Array<TextDto['id']>>([])
@@ -42,8 +44,9 @@ const destroyText = (text: TextDto) => {
     })
 }
 
-
 const createMedia = (file: File) => {
+    if (!canCreateMedia.value) return;
+
     router.post(route('medias.store'), {
         file,
     }, {
@@ -52,6 +55,7 @@ const createMedia = (file: File) => {
 }
 
 const destroyedMediaIds = ref<Array<MediaDto['id']>>([])
+const canCreateMedia = computed(() => props.medias.length < props.maxMediaCount)
 const {open, onChange} = useFileDialog({
     accept: '*',
     directory: false,
@@ -88,16 +92,18 @@ const handlePaste = (e: ClipboardEvent) => {
         <div class="px-2 max-w-lg mx-auto flex flex-col gap-2 py-20" @paste="handlePaste">
             <h1 class="text-2xl mb-2">Clipboard</h1>
 
-            <article class="w-full flex">
+            <article class="w-full flex-col">
                 <TextCardInput class="w-full" @save="saveText" placeholder="Copy anything..." :focused="!focusTextId || texts?.length===0" />
             </article>
 
-            <button type="button" @click="()=>open()"
-                    class="rounded-lg border border-neutral-100 bg-neutral-50 text-neutral-800 px-4 py-2 mr-auto flex gap-1 items-center text-lg">
-                Select file
+            <div class="flex items-center gap-4">
+                <VButton variant="tertiary" :disabled="!canCreateMedia" @click="()=>open()">
+                    Select file
 
-                <PlusIcon class="size-5" />
-            </button>
+                    <PlusIcon class="size-5" />
+                </VButton>
+                <p :class="canCreateMedia||'text-red-700 font-bold'">{{ medias.length }}/{{ maxMediaCount }} media uploaded</p>
+            </div>
 
             <div class="mt-6 flex flex-col-reverse gap-2">
                 <template v-for="media in medias">

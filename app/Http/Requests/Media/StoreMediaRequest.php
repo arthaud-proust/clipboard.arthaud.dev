@@ -12,7 +12,7 @@ class StoreMediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->getMedia()->count() < User::MAX_MEDIA_COUNT;
     }
 
     /**
@@ -23,7 +23,7 @@ class StoreMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => ['required', 'file', "max:" . User::MAX_MEDIA_SIZE_KB],
+            'file' => ['required', 'file', "max:" . config('media-library.max_file_size')],
         ];
     }
 }

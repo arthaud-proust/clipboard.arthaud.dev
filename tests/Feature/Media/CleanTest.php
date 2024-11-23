@@ -3,11 +3,11 @@
 namespace Tests\Feature\Media;
 
 use App\Cleaners\MediaCleaner;
+use App\Models\Media;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 use function resolve;
 
