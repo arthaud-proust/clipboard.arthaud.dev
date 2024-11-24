@@ -4,7 +4,9 @@
     "scripts": {
         "build": "vue-tsc && vite build",
         "dev": "vite",
-        "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix"
+        "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix",
+        "prepare": "husky",
+        "test": "vue-tsc"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -18,6 +20,7 @@
         "concurrently": "^9.0.1",
         "eslint": "^8.57.0",
         "eslint-plugin-vue": "^9.23.0",
+        "husky": "^9.1.7",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
         "prettier": "^3.3.0",
