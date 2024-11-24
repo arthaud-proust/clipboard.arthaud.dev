@@ -14,7 +14,7 @@ usePoll(2000);
         <div>
             <p class="text-neutral-500">Device B</p>
             <h1 class="text-5xl">Token {{ token }}</h1>
-            <p>Waiting for approval on device A...</p>
+            <p>Waiting for approval on device A...</p>
         </div>
     </div>
 </template>

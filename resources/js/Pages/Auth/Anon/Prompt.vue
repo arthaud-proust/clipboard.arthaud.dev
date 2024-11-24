@@ -20,9 +20,9 @@ const anonId = (anonUser: AnonUserDto) => anonUser.email.split('@')[0];
             <p class="text-neutral-500">Device A</p>
             <h1 class="text-5xl">Session {{ anonId(anonUser) }}</h1>
             <p v-if="anonTokens.length === 0">
-                Waiting for request from device B...
+                Waiting for request from device B...
             </p>
-            <p v-else>Click on the token number displayed on device B.</p>
+            <p v-else>Click on the token number displayed on device B.</p>
         </div>
 
         <div class="flex flex-col gap-1" v-if="anonTokens.length > 0">
