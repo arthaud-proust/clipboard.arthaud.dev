@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\Anon\AnonymousSessionAuthenticationPromptController;
+use App\Http\Controllers\Auth\Anon\AnonymousSessionController;
+use App\Http\Controllers\Auth\Anon\AnonymousUserController;
+use App\Http\Controllers\Auth\Anon\AuthenticateAnonymousSessionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -22,6 +26,11 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
+    Route::get('anon', [AnonymousUserController::class, 'index'])->name('anon.index');
+    Route::get('anon/register', [AnonymousUserController::class, 'store'])->name('anon.register');
+
+    Route::get('anon/{user}/login/{token}', [AnonymousSessionController::class, 'create'])->name('anon.login');
+
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 
@@ -36,6 +45,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('anon/{user}/prompt', AnonymousSessionAuthenticationPromptController::class)->name('anon.prompt');
+
+    Route::get('anon/{user}/authenticate/{token}', AuthenticateAnonymousSessionController::class)->name('anon.authenticate');
+
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
