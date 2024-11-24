@@ -10,8 +10,8 @@ class Stat extends Model
     /** @use HasFactory<\Database\Factories\StatFactory> */
     use HasFactory;
 
-    protected $primaryKey = "id";
     public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $fillable = [
         "value",
