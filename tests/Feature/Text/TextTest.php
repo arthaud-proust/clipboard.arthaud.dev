@@ -4,8 +4,10 @@ namespace Tests\Feature\Text;
 
 use App\Models\Text;
 use App\Models\User;
+use App\Stats\TransfersCountStat;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use function app;
 
 class
 TextTest extends TestCase
@@ -26,6 +28,21 @@ TextTest extends TestCase
         $this->assertDatabaseHas(Text::class, [
             'content' => 'Lorem ipsum',
         ]);
+    }
+
+    public function test_create_text_increment_transfers_count(): void
+    {
+        $this->assertEquals(0, app(TransfersCountStat::class)->value());
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post('/texts', [
+                'content' => 'Lorem ipsum',
+            ]);
+
+        $response->assertRedirect('/home');
+        $this->assertEquals(1, app(TransfersCountStat::class)->value());
     }
 
     public function test_can_edit_text(): void
