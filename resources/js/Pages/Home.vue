@@ -8,6 +8,7 @@ import { PlusIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 import { Head, router } from '@inertiajs/vue3';
 import { useFileDialog } from '@vueuse/core';
 import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps<{
     texts: Array<TextDto>;
@@ -15,6 +16,8 @@ const props = defineProps<{
     maxMediaCount: number;
     focusTextId?: TextDto['id'];
 }>();
+
+const { t } = useI18n();
 
 const destroyedTextIds = ref<Array<TextDto['id']>>([]);
 const saveText = (
@@ -101,20 +104,20 @@ const handlePaste = (e: ClipboardEvent) => {
 </script>
 
 <template>
-    <Head title="Clipboard" />
+    <Head :title="t('clipboard')" />
 
     <AuthenticatedLayout>
         <div
             class="mx-auto flex max-w-lg flex-col gap-2 px-2 py-20"
             @paste="handlePaste"
         >
-            <h1 class="mb-2 text-2xl">Clipboard</h1>
+            <h1 class="mb-2 text-2xl">{{ t('clipboard') }}</h1>
 
             <article class="w-full flex-col">
                 <TextCardInput
                     class="w-full"
                     @save="saveText"
-                    placeholder="Copy anything..."
+                    :placeholder="t('copy_anything')"
                     :focused="!focusTextId || texts?.length === 0"
                 />
             </article>
@@ -125,12 +128,17 @@ const handlePaste = (e: ClipboardEvent) => {
                     :disabled="!canCreateMedia"
                     @click="() => open()"
                 >
-                    Select file
+                    {{ t('select_file') }}
 
                     <PlusIcon class="size-5" />
                 </VButton>
                 <p :class="canCreateMedia || 'font-bold text-red-700'">
-                    {{ medias.length }}/{{ maxMediaCount }} media uploaded
+                    {{
+                        t('media_uploaded', {
+                            count: medias.length,
+                            countMax: maxMediaCount,
+                        })
+                    }}
                 </p>
             </div>
 
