@@ -58,5 +58,8 @@
     "resend_verification_email": "Reenviar correo de verificación",
     "a_new_verification_link_has_been_sent_to_the_email": "Se ha enviado un nuevo enlace de verificación a la dirección de correo electrónico que proporcionaste durante el registro.",
     "thanks_for_signing_up_before_getting_started_could": "¡Gracias por registrarte! Antes de comenzar, ¿podrías verificar tu dirección de correo electrónico haciendo clic en el enlace que acabamos de enviarte? Si no recibiste el correo, estaremos encantados de enviarte otro.",
-    "email_verification": "Verificación de correo electrónico"
+    "email_verification": "Verificación de correo electrónico",
+    "a_better_tool_exists": "Existe una mejor herramienta",
+    "send_files_and_texts_in_a_more_secure_and_direct_w": "Envía archivos y textos de una manera más segura y directa, todo sin ninguna configuración.",
+    "discover_localsend": "Descubre LocalSend"
 }

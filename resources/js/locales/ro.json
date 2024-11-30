@@ -58,5 +58,8 @@
     "resend_verification_email": "Retrimiteți emailul de verificare",
     "a_new_verification_link_has_been_sent_to_the_email": "Un nou link de verificare a fost trimis la adresa de email pe care ați furnizat-o la înregistrare.",
     "thanks_for_signing_up_before_getting_started_could": "Vă mulțumim pentru înregistrare! Înainte de a începe, ați putea să vă verificați adresa de email făcând clic pe linkul pe care tocmai vi l-am trimis? Dacă nu ați primit emailul, vă vom trimite cu plăcere altul.",
-    "email_verification": "Verificare email"
+    "email_verification": "Verificare email",
+    "a_better_tool_exists": "Există un instrument mai bun",
+    "send_files_and_texts_in_a_more_secure_and_direct_w": "Trimite fișiere și mesaje într-un mod mai sigur și direct, totul fără nicio configurare.",
+    "discover_localsend": "Descoperă LocalSend"
 }

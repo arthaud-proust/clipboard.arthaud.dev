@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
+import LocalSendAnnouncement from '@/Components/LocalSendAnnouncement.vue';
 import { useI18n } from 'vue-i18n';
 
 defineProps<{
@@ -14,6 +15,8 @@ const { t } = useI18n();
     <div
         class="mx-auto flex min-h-dvh max-w-lg flex-col justify-center gap-12 px-2 pb-8 pt-40 text-lg"
     >
+        <LocalSendAnnouncement />
+
         <div>
             <h1 class="text-5xl font-bold">{{ t('clipboard') }}</h1>
             <p class="pl-1">{{ t('copy_content_across_devices_with_ease') }}</p>
